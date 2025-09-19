@@ -1,0 +1,2 @@
+GV1,name_gv1,MK1,0
+GV2,name_gv2,MK2,1

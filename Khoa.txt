@@ -1,0 +1,2 @@
+MK1,Cong nghe thong tin
+MK2,Dien
