@@ -1,2 +1,0 @@
-SV1,name_sv1,MK1,1
-SV2,name_sv2,MK2,0
