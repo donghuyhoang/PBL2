@@ -1,6 +1,0 @@
-SV,1,sv1
-SV,2,sv2
-GV,1,gv1
-GV,2,gv2
-AD,1,ad1
-AD,2,ad2
