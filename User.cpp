@@ -1,13 +1,23 @@
 #include "User.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 User::User(){
-    this->Id = "NULL";
-    this->Name = "NULL";
+    Id = "";
+    Name = "";
+    khoa = nullptr;
+    type = UserType::STUDENT;
 }
 
-User::User(const string& id, const string &name) : Id(id),Name(name){
-}
-User::~User(){};
-void User::show_info(){
-    cout << "ID: " << this->Id << " Name: " << this->Name << endl;
+User::User(string id, string name, Khoa* khoaPtr, UserType userType) 
+    : Id(id), Name(name), khoa(khoaPtr), type(userType) {}
+
+User::~User() {};
+
+void User::displayInfo() const {
+    cout << "ID: " << Id << " - Name: " << Name;
+    if (khoa != nullptr) {
+        cout << " - Khoa: " << khoa->getTenKhoa();
+    }
 }
