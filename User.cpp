@@ -1,6 +1,7 @@
 #include "User.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 User::User(){
@@ -20,4 +21,6 @@ void User::displayInfo() const {
     if (khoa != nullptr) {
         cout << " - Khoa: " << khoa->getTenKhoa();
     }
+    cout << endl;
 }
+

@@ -1,4 +1,5 @@
-#include "Account.h"   
+#include "Account.h"
+
 Account::Account() : Username(""), Password(""), user(nullptr) {}
 
 Account::Account(string username, string password, User* userPtr) 
@@ -36,3 +37,4 @@ string Account::toString() const {
 }
 
 Account::~Account() {}
+

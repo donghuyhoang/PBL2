@@ -3,9 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include "MyVector.h"
+#include <vector>
+#include "MyVector.h" // Đảm bảo bạn có file MyVector.h
 
 using namespace std;
 
@@ -25,14 +24,17 @@ private:
     int capacity;
     int size;
 
+    // DJB2 Hash Function: An toàn cho mọi ký tự
     int hashFunction(const string& key) {
-        int hash = 0;
-        for (char c : key) hash = (hash * 31 + c) % capacity;
-        return hash;
+        unsigned long hash = 5381;
+        for (char c : key) {
+            hash = ((hash << 5) + hash) + (unsigned char)c; 
+        }
+        return (hash & 0x7FFFFFFF) % capacity;
     }
 
 public:
-    HashTable(int cap = 100) : capacity(cap), size(0) {
+    HashTable(int cap = 2000) : capacity(cap), size(0) {
         table = new HashEntry<T>*[capacity]();
     }
 
@@ -44,6 +46,7 @@ public:
     bool insert(const string& key, const T& value) {
         int index = hashFunction(key);
         HashEntry<T>* entry = table[index];
+        
         while (entry != nullptr) {
             if (entry->key == key) {
                 entry->value = value;
@@ -51,12 +54,14 @@ public:
             }
             entry = entry->next;
         }
+        
         HashEntry<T>* newEntry = new HashEntry<T>(key, value);
         newEntry->next = table[index];
         table[index] = newEntry;
         size++;
         return true;
     }
+    size_t getSize() const { return size; }
 
     T* searchByString(const string& key) {
         int index = hashFunction(key);
@@ -95,21 +100,9 @@ public:
                 entry = entry->next;
             }
         }
-        // Sắp xếp an toàn (tránh crash nếu key không có số)
-        sort(result.begin(), result.end(), [](const T& a, const T& b) {
-            try {
-                string k1 = a.getKey(); string k2 = b.getKey();
-                if (k1.length() > 2 && k2.length() > 2 && isdigit(k1[2]) && isdigit(k2[2])) {
-                    return stoi(k1.substr(2)) < stoi(k2.substr(2));
-                }
-                return k1 < k2;
-            } catch (...) { return false; }
-        });
         return result;
     }
 
-    int getSize() const { return size; }
-    bool isEmpty() const { return size == 0; }
     bool contains(const string& key) { return searchByString(key) != nullptr; }
 
     void clear() {

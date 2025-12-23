@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 class LopHocPhan{
     private:
         string Malophp;

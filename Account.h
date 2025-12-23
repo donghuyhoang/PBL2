@@ -5,7 +5,7 @@
 using namespace std;
 
 #pragma once
-class Account{
+class Account{          
     private:
         string Username;
         string Password;
